@@ -1,0 +1,168 @@
+<form class="form-horizontal" name="userForm">
+    <div class="{{applyValidationStyle(userForm.firstName)}}">
+        <label class="col-sm-3 control-label">Имя*</label>
+        <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   name="firstName"
+                   ng-model="user.firstName"
+                   placeholder=""
+                   ng-minlength="2"
+                   ng-maxlength="20"
+                   ng-pattern="/^[a-zA-Zа-яА-ЯёЁ][а-яА-ЯёЁa-zA-Z0 -9-_\.]*$/"
+                   required
+            />
+            <small class="help-block" ng-show="userForm.firstName.$error.minlength">Имя слишком короткое</small>
+            <small class="help-block" ng-show="userForm.firstName.$error.maxlength">Имя слишком длинное</small>
+            <small class="help-block" ng-show="userForm.firstName.$error.pattern">
+                Имя содержит недопустимые символы или начинается не с буквы
+            </small>
+        </div>
+    </div>
+
+    <div class="{{applyValidationStyle(userForm.lastName)}}">
+        <label class="col-sm-3 control-label">Фамилия*</label>
+        <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   name="lastName"
+                   ng-model="user.lastName"
+                   placeholder=""
+                   ng-minlength="2"
+                   ng-maxlength="20"
+                   ng-pattern="/^[a-zA-Zа-яА-ЯёЁ][а-яА-ЯёЁa-zA-Z0 -9-_\.]*$/"
+                   required
+            />
+            <small class="help-block" ng-show="userForm.lastName.$error.minlength">Фамилия слишком короткое</small>
+            <small class="help-block" ng-show="userForm.lastName.$error.maxlength">Фамилия слишком длинное</small>
+            <small class="help-block" ng-show="userForm.lastName.$error.pattern">
+                Фамилия содержит недопустимые символы или начинается не с буквы
+            </small>
+
+        </div>
+    </div>
+
+    <div class="{{applyValidationStyle(userForm.email)}}">
+        <label class="col-sm-3 control-label">Почта*</label>
+        <div class="col-sm-9">
+            <input type="email"
+                   class="form-control"
+                   name="email"
+                   ng-model="user.email"
+                   placeholder=""
+                   ng-pattern="/^[-\w.\+]+@([A-z0-9][-A-z0-9]+\.)+[A-z]{2,4}$/"
+                   required
+            />
+            <small class="help-block" ng-show="userForm.email.$error.pattern">Некорректная почта</small>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Пол</label>
+        <div class="col-sm-9">
+            <select class="form-control"
+                    name="gender"
+                    ng-model="user.gender">
+                <option value="male">Мужской</option>
+                <option value="female">Женский</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label">День Рождения</label>
+        <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   id="datetimepicker"
+                   name="birthDate"
+                   ng-model="user.birthDate"
+                   placeholder=""
+            />
+            <small class="help-block"></small>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-3 control-label">Аватар</label>
+            <div class="col-sm-9">
+                <div ng-class="user.avatar ? 'btn-group col-sm-12' : 'col-sm-12'">
+                    <label ng-disabled="user.avatarWillDelete"
+                            id="upload-button"
+                            ng-class="'btn btn-' + fileButton + ' col-sm-6'">
+                        {{fileValidationMessage}}
+                        <input type="file"
+                               name="avatar"
+                               id="form-avatar"
+                               ng-model="user.avatar"
+                               ng-disabled="user.avatarWillDelete"
+                               accept="image/*"
+                               file-model="file"
+                        />
+                    </label>
+                    <a type="button"
+                            id="delete-avatar-button"
+                            ng-class="user.avatarWillDelete
+                                ? 'btn btn-danger col-sm-6'
+                                : 'btn btn-default col-sm-6'"
+                            ng-show="user.avatar"
+                            ng-click="updateDeleteAvatarState()">
+                        {{user.avatarWillDelete ? "Аватар будет удален" : "Удалить аватар"}}
+                    </a>
+                </div>
+            </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-3 col-sm-9">
+            <img ng-src="{{user.avatar}}"
+                 id="preview"
+                 class="col-sm-offset-3 col-sm-6">
+        </div>
+    </div>
+    <div class="{{applyValidationStyle(userForm.phone)}}">
+        <label class="col-sm-3 control-label">Телефон</label>
+        <div class="col-sm-9">
+            <input type="tel"
+                   class="form-control"
+                   id="phone"
+                   name="phone"
+                   ng-model="user.phone"
+                   placeholder=""
+                   ng-pattern="/^\+\d{11}$/"
+            />
+            <small class="help-block" ng-show="userForm.phone.$error.pattern">Введите правильный номер телефона</small>
+        </div>
+    </div>
+
+    <div class="{{applyValidationStyle(userForm.skype)}}">
+        <label class="col-sm-3 control-label">Skype</label>
+        <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   name="skype"
+                   ng-model="user.skype"
+                   placeholder=""
+                   ng-minlength="6"
+                   ng-maxlength="32"
+                   ng-pattern="/^[a-zA-Z][a-zA-Z0-9\.\,\-\_]*$/"
+            />
+            <small class="help-block" ng-show="userForm.skype.$error.minlength">Skype id слишком короткий</small>
+            <small class="help-block" ng-show="userForm.skype.$error.maxlength">Skype id слишком длинный</small>
+            <small class="help-block" ng-show="userForm.skype.$error.pattern">Введите правильный Skype id</small>
+        </div>
+    </div>
+
+    <div class="{{applyValidationStyle(userForm.vk)}}">
+        <label class="col-sm-3 control-label">ID Вконтакте</label>
+        <div class="col-sm-9">
+            <input type="text"
+                   class="form-control"
+                   name="vk"
+                   ng-model="user.vk"
+                   placeholder=""
+                   ng-pattern="/^([a-zA-Z0-9\_]{5,33}|id\d{1,31})$/"
+            />
+            <small class="help-block" ng-show="userForm.vk.$error.pattern">Введите правильный ID Вконтакте</small>
+        </div>
+    </div>
+</form>

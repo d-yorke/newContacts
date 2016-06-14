@@ -1,0 +1,106 @@
+<div class="page-header">
+    <h3>Детали<small></small>
+        <div class="btn-group pull-right" role="group">
+            <a class="btn btn-default"
+               ng-href="#/">
+                Назад
+            </a>
+            <a class="btn btn-default"
+               href=""
+               data-toggle="modal"
+               data-target="#delete-confirmation">
+                Удалить
+            </a>
+            <a id="edit"
+               class="btn btn-default"
+               href=""
+               data-toggle="modal"
+               data-target="#edit-user">
+                Изменить
+            </a>
+        </div>
+    </h3>
+</div>
+<div class="row">
+        <div class="col-sm-4">
+            <img class="img-rounded pull-right"
+                 id="avatar"
+                 ng-src="{{user.avatar}}"
+            />
+        </div>
+        <div class="col-sm-8">
+            <h4>{{user.firstName + " " + user.lastName}}</h4>
+            <hr/>
+            <div class="row">
+                <div ng-show="user.birthDatePretty">
+                    <p class="col-sm-4">День рождения:</p>
+                    <p class="col-sm-8">{{user.birthDatePretty}}</p>
+                </div>
+
+                <p class="col-sm-4">Почта:</p>
+                <p class="col-sm-8">{{user.email}}</p>
+
+                <div ng-show="user.phone">
+                    <p class="col-sm-4">Телефон:</p>
+                    <p class="col-sm-8">{{user.phone}}</p>
+                </div>
+
+                <div ng-show="user.skype">
+                    <p class="col-sm-4">Skype:</p>
+                    <p class="col-sm-8">{{user.skype}}</p>
+                </div>
+
+                <div ng-show="user.vk">
+                    <p class="col-sm-4">Вконтакте:</p>
+                    <p class="col-sm-8">
+                        <a target="_blank" ng-href="{{'https://vk.com/' + user.vk}}">{{user.vk}}</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<!--delete modal-->
+<div class="modal fade" id="delete-confirmation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Подтверждение удаления</h4>
+            </div>
+            <div class="modal-body">
+                Вы действительно хотите удалить контакт <b>{{user.firstName + " " + user.lastName}}</b>?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-danger" ng-click="deleteUser()">Удалить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--edit modal-->
+<div class="modal fade" id="edit-user" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Изменение</h4>
+            </div>
+            <div class="modal-body">
+                <div form-tmp>
+                    <!--form template-->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                <button type="button" class="btn btn-success" ng-disabled="!userForm.$valid" ng-click="updateUser()">Сохранить</button>
+            </div>
+        </div>
+    </div>
+</div>

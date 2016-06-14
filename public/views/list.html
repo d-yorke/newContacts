@@ -1,0 +1,18 @@
+<div class="page-header">
+    <h3>Контакты
+        <a ng-href="#/create" class="btn btn-default pull-right">Создать</a>
+    </h3>
+</div>
+<input type="text"
+       class="form-control"
+       id="search"
+       name="search"
+       ng-model="search"
+       placeholder="Поиск"
+/>
+<br>
+<div class="list-group">
+    <a ng-href="#/user?id={{users._id}}" class="list-group-item" ng-repeat="users in users | orderBy: 'lastName'">
+        {{users.firstName + " " + users.lastName}}
+    </a>
+</div>

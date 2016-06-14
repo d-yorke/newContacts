@@ -1,0 +1,116 @@
+/*
+
+body {
+    background: url("http://www.hdwallpaperspulse.com/wp-content/uploads/2014/04/23/foggy-forest-3.jpg"), center no-repeat;
+    font-family: 'PT Sans', sans-serif;
+}
+
+
+h3 {
+    font-family: "Merriweather", serif;
+    color: #403B37;
+}
+
+.page-header {
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.list-group a {
+    background: transparent;
+    color: rgba(0, 0, 0, 0.8);
+    border: none;
+    margin: 0;
+}
+
+.list-group a:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: rgba(0, 0, 0, 0.9);
+}
+
+.btn-default, .btn:focus {
+    outline: none;
+    background: transparent;
+    color: rgba(0, 0, 0, 0.6);
+    border-color: rgba(255, 255, 255, 0.3);
+    font-family: 'PT Sans', sans-serif;
+}
+
+.btn-default:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(0, 0, 0, 0.7);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+.btn-default:active:focus {
+    box-shadow: none;
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.btn:disabled:hover, .btn:disabled {
+    opacity: 0.4;
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.3);
+    border-left-color: transparent;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.control-label {
+    color: #000;
+}
+
+.form-control {
+    color: rgba(0, 0, 0, 0.7);
+    background: rgba(255, 255, 255, 0.1);
+    border: 0 solid transparent;
+}
+.form-control:focus {
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),0 0 8px rgba(255, 255, 255, 0.6);
+}
+.form-control::-webkit-input-placeholder {
+    font-family: 'PT Sans', sans-serif;
+    color: rgba(0, 0, 0, 0.2);
+}
+.form-control:-moz-placeholder {
+    font-family: 'PT Sans', sans-serif;
+    color: rgba(0, 0, 0, 0.2);
+}
+*/
+
+#avatar {
+    max-height: 300px;
+    max-width: 200px;
+}
+
+.form-group {
+    max-height: 300px;
+    margin-bottom: 10px;
+}
+
+.help-block {
+    margin: 0;
+}
+#preview {
+    display: none;
+}
+
+#alert-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+#alert {
+    display: inline-block;
+    border-top: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    padding: 3px 10px;
+}
+#form-avatar {
+    display: none;
+}

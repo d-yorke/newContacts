@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru" ng-app="Contacts">
+    <head>
+        <meta charset="UTF-8">
+        <title>Контакты</title>
+
+        <!--bower components-->
+        <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="/bower_components/moment/min/moment.min.js"></script>
+        <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+        <script src="/bower_components/angular/angular.min.js"></script>
+        <script src="/bower_components/angular-route/angular-route.min.js"></script>
+        <link rel="stylesheet"
+              href="/bower_components/bootstrap/dist/css/bootstrap.min.css"
+        />
+        <link rel="stylesheet"
+              href="/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
+        />
+
+        <!--custom components-->
+        <script src="../public/javascripts/ru.js"></script>
+        <script src="../public/javascripts/inputmask.min.js"></script>
+        <script src="../public/javascripts/app.js"></script>
+        <script src="../public/javascripts/controllers/list.js"></script>
+        <script src="../public/javascripts/controllers/main.js"></script>
+        <link rel="stylesheet"
+              href="../public/stylesheets/style.css"
+        />
+        <link rel="stylesheet"
+              href="https://fonts.googleapis.com/css?family=Merriweather:700italic|PT+Sans&subset=latin,cyrillic"
+        />
+    </head>
+
+    <body>
+        <div ng-controller="GlobalCtrl" class="container-fluid">
+            <div id="alert-container">
+                <div class="alert alert-danger" id="alert" role="alert">{{error}}</div>
+            </div>
+            <div id="container" ng-view class="col-sm-offset-3 col-sm-6">
+                <!--app content-->
+            </div>
+        </div>
+    </body>
+</html>
