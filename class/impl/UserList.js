@@ -1,7 +1,5 @@
 var UserModel = require("./../utils/mongoose");
 var User = require("./User");
-var log4js = require("log4js");
-var logger = log4js.getLogger();
 
 function UserList() {
     this.getUser = function (searchObj, callback) {
@@ -28,4 +26,3 @@ function UserList() {
 }
 
 module.exports = UserList;
-logger.trace(__filename + " - connected");

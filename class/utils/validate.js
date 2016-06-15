@@ -1,8 +1,7 @@
-var log4js = require('log4js');
-var logger = log4js.getLogger();
-
-function validate (formData) {
-    if (!(formData.firstName && formData.lastName && formData.email)) return "required fields is empty";
+function validate(formData) {
+    if (!(formData.firstName && formData.lastName && formData.email)) {
+        return "required fields is empty";
+    }
 
     var regs = [/^[a-zA-Zа-яА-ЯёЁ][а-яА-ЯёЁa-zA-Z0 -9-_\.]{1,19}$/,
         /^[a-zA-Zа-яА-ЯёЁ][а-яА-ЯёЁa-zA-Z0 -9-_\.]{1,19}$/,
@@ -18,7 +17,9 @@ function validate (formData) {
     for (var prop in formData) {
         for (var i = 0; i < fields.length; i++) {
             if (prop === fields[i]) {
-                if (formData[prop] ? formData[prop].search(regs[i]) : false) result.push(fields[i]);
+                if (formData[prop] && formData[prop].search(regs[i])) {
+                    result.push(fields[i]);
+                }
                 break;
             }
         }
@@ -28,4 +29,3 @@ function validate (formData) {
 }
 
 module.exports = validate;
-logger.trace(__filename + " - connected");

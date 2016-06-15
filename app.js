@@ -23,7 +23,7 @@ app.use("*",function(req, res, next) {
     next();
 }); // logging method, url and ip
 
-app.get('/', express.static("public"));
+app.get("/", express.static("public"));
 app.route("/list")
     .get(function(req, res) {
         tools(req, res, "getList", "");
@@ -38,39 +38,14 @@ app.route("/id*")
     .post(function(req, res) {
         tools(req, res, req.body.operation, "");
     });
-app.post("/new", function (req, res) {
+app.post("/new", function(req, res) {
     tools(req, res, req.body.operation, "");
 });
-app.post("/photo", function (req, res) {
+app.post("/photo", function(req, res) {
     multerUpload(req, res);
 });
 app.get("/*", function(req, res) {
     res.redirect("/");
 });
 
-/*// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-    var err = new Error("Not Found");
-    err.status = 404;
-    next(err);
-});
-
-// error handlers
-
-// development error handler
-// will print stacktrace
-if (app.get("env") === "development") {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500).end();
-    });
-}
-
-// production error handler
-// no stacktraces leaked to user
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500).end();
-});*/
-
-
 module.exports = app;
-logger.trace(__filename + " - connected");

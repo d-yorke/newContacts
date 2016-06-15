@@ -63,6 +63,7 @@
             <select class="form-control"
                     name="gender"
                     ng-model="user.gender">
+                <option value=""></option>
                 <option value="male">Мужской</option>
                 <option value="female">Женский</option>
             </select>
@@ -85,32 +86,36 @@
 
     <div class="form-group">
         <label class="col-sm-3 control-label">Аватар</label>
-            <div class="col-sm-9">
-                <div ng-class="user.avatar ? 'btn-group col-sm-12' : 'col-sm-12'">
-                    <label ng-disabled="user.avatarWillDelete"
-                            id="upload-button"
-                            ng-class="'btn btn-' + fileButton + ' col-sm-6'">
-                        {{fileValidationMessage}}
-                        <input type="file"
-                               name="avatar"
-                               id="form-avatar"
-                               ng-model="user.avatar"
-                               ng-disabled="user.avatarWillDelete"
-                               accept="image/*"
-                               file-model="file"
-                        />
-                    </label>
-                    <a type="button"
-                            id="delete-avatar-button"
-                            ng-class="user.avatarWillDelete
-                                ? 'btn btn-danger col-sm-6'
-                                : 'btn btn-default col-sm-6'"
-                            ng-show="user.avatar"
-                            ng-click="updateDeleteAvatarState()">
-                        {{user.avatarWillDelete ? "Аватар будет удален" : "Удалить аватар"}}
-                    </a>
-                </div>
+        <div class="col-sm-9">
+            <div class="col-sm-12">
+                <label ng-hide="file"
+                       id="upload-button"
+                       class="btn btn-default col-sm-6">
+                    {{user.avatar ? "Выбрать другой аватар" : "Выбрать аватар"}}
+                    <input type="file"
+                           name="avatar"
+                           id="form-avatar"
+                           ng-model="user.avatar"
+                           accept="image/*"
+                           file-model="file"
+                    />
+                </label>
+                <a type="button"
+                   ng-show="file"
+                   class="btn btn-default col-sm-6"
+                   ng-click="cancelUploadAvatar()">
+                Отменить выбор
+                </a>
+                <a type="button"
+                   ng-show="user.avatar && !file"
+                   id="delete-avatar-button"
+                   class="btn btn-default col-sm-6"
+                   ng-click="updateDeleteAvatarState()">
+                    {{user.avatarWillDelete ? "Вернуть аватар" : "Удалить аватар"}}
+                </a>
             </div>
+            <small class="help-block text-center has-error">{{fileValidationMessage}}</small>
+        </div>
     </div>
     <div class="form-group">
         <div class="col-sm-offset-3 col-sm-9">

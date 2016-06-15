@@ -1,93 +1,137 @@
+/* Text color */
 body {
     background: url("/public/default_images/forest.jpg") no-repeat fixed;
     background-size: cover;
     font-family: "PT Sans", sans-serif;
+    color: rgba(0, 0, 0, 0.8);
 }
-
 
 h3 {
     font-family: "Merriweather", sans-serif;
-    color: rgba(0, 0, 0, 0.8);
 }
 
-.page-header, hr, .modal-footer {
+hr,
+.page-header,
+.modal-footer,
+.btn-default,
+.btn:focus,
+.btn-default:hover,
+.btn-default:active:focus,
+.btn-default:active,
+.btn-default:active:hover {
     border-color: rgba(0, 0, 0, 0.1);
 }
 
-.list-group a {
+.list-group a,
+.btn-default,
+.btn:focus,
+.btn:disabled:hover,
+.btn:disabled,
+.btn-success:disabled:hover,
+.btn-success:disabled,
+.btn[disabled]:hover,
+.btn[disabled],
+.btn-success[disabled]:hover,
+.btn-success[disabled]{
     background: transparent;
-    color: rgba(0, 0, 0, 0.8);
+}
+
+.list-group a,
+.help-block {
     border: none;
     margin: 0;
 }
 
-.list-group a:hover {
+.list-group a:hover,
+.form-control {
     background: rgba(0, 0, 0, 0.02);
 }
 
-.btn-default, .btn:focus {
+.btn-default,
+.btn:focus,
+.btn-success:active,
+.btn-success:active:focus,
+.btn-success:active:hover,
+.btn-danger:active,
+.btn-danger:active:focus,
+.btn-danger:active:hover,
+.btn-default:active:focus,
+.btn-default:active,
+.btn-default:active:hover,
+#vk-link,
+#vk-link:focus,
+#vk-link:hover {
     outline: none;
-    background: transparent;
-    color: rgba(0, 0, 0, 0.8);
-    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.btn-default, .btn:focus {
     font-family: "PT Sans", sans-serif;
 }
 
 .btn-success,
 .btn-success:focus {
+    color: rgba(0, 0, 0, 0.8);
     border-color: rgba(68, 158, 68, 0.3);
     background: rgba(68, 158, 68, 0.3);
-    color: rgba(0, 0, 0, 0.8);
+
 }
 
 .btn-success:hover {
+    color: rgba(0, 0, 0, 0.8);
     border-color: rgba(38, 128, 38, 0.3);
     background: rgba(38, 128, 38, 0.3);
+
+}
+
+.btn-success:active,
+.btn-success:active:focus,
+.btn-success:active:hover,
+.btn-danger:active,
+.btn-danger:active:focus,
+.btn-danger:active:hover,
+.btn-default:active:focus,
+.btn-default:active,
+.btn-default:active:hover{
     color: rgba(0, 0, 0, 0.8);
+    box-shadow: none;
 }
 
 .btn-success:active,
 .btn-success:active:focus,
 .btn-success:active:hover {
-    outline: none;
-    box-shadow: none;
+    color: rgba(0, 0, 0, 0.8);
     border-color: rgba(38, 128, 38, 0.4);
     background: rgba(38, 128, 38, 0.4);
-    color: rgba(0, 0, 0, 0.8);
+
 }
 
 .btn-danger,
 .btn-danger:focus {
+    color: rgba(0, 0, 0, 0.8);
     border-color: rgba(200, 50, 45, 0.3);
     background: rgba(200, 50, 45, 0.3);
-    color: rgba(0, 0, 0, 0.8);
+
 }
 
 .btn-danger:hover {
+    color: rgba(0, 0, 0, 0.8);
     border-color: rgba(170, 20, 15, 0.3);
     background: rgba(170, 20, 15, 0.3);
-    color: rgba(0, 0, 0, 0.8);
+
 }
 
 .btn-danger:active,
 .btn-danger:active:focus,
 .btn-danger:active:hover {
-    outline: none;
-    box-shadow: none;
+    color: rgba(0, 0, 0, 0.8);
     border-color: rgba(170, 20, 15, 0.4);
     background: rgba(170, 20, 15, 0.4);
-    color: rgba(0, 0, 0, 0.8);
+
 }
 
-.btn-default:hover {
-    color: rgba(0, 0, 0, 0.8);
-    border-color: rgba(0, 0, 0, 0.1);
-    background: rgba(0, 0, 0, 0.05);
-}
-.btn-default:active:focus, .btn-default:active, .btn-default:active:hover {
-    outline: none;
-    box-shadow: none;
-    border-color: rgba(0, 0, 0, 0.1);
+.btn-default:active:focus,
+.btn-default:active,
+.btn-default:active:hover {
     background: rgba(0, 0, 0, 0.08);
 }
 
@@ -98,9 +142,9 @@ h3 {
 .btn[disabled]:hover,
 .btn[disabled],
 .btn-success[disabled]:hover,
-.btn-success[disabled] {
+.btn-success[disabled],
+.disabled{
     opacity: 0.4;
-    background: transparent;
     border-color: transparent;
     color: rgba(0, 0, 0, 0.6);
 }
@@ -111,7 +155,6 @@ h3 {
 
 .form-control {
     color: rgba(0, 0, 0, 0.7);
-    background: rgba(0, 0, 0, 0.02);
     border: 0 solid transparent;
 }
 .form-control:focus {
@@ -119,16 +162,12 @@ h3 {
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.14),0 0 8px rgba(0, 0, 0, 0.2);
 }
 .form-control::-webkit-input-placeholder {
-    font-family: 'PT Sans', sans-serif;
+    font-family: "PT Sans", sans-serif;
     color: rgba(0, 0, 0, 0.4);
 }
 .form-control:-moz-placeholder {
-    font-family: 'PT Sans', sans-serif;
+    font-family: "PT Sans", sans-serif;
     color: rgba(0, 0, 0, 0.4);
-}
-
-.disabled {
-    opacity: 0.4;
 }
 
 .bootstrap-datetimepicker-widget table td.active,
@@ -146,7 +185,8 @@ h3 {
 .bootstrap-datetimepicker-widget table td.minute:hover,
 .bootstrap-datetimepicker-widget table td.second:hover,
 .bootstrap-datetimepicker-widget table thead tr:first-child th:hover,
-.bootstrap-datetimepicker-widget table td span:hover {
+.bootstrap-datetimepicker-widget table td span:hover,
+.btn-default:hover{
     background: rgba(0, 0, 0, 0.05);
 }
 
@@ -165,7 +205,6 @@ h3 {
 #vk-link,
 #vk-link:focus,
 #vk-link:hover {
-    outline: none;
     color: inherit;
     text-decoration: underline;
 }
@@ -182,9 +221,6 @@ h3 {
     margin-bottom: 10px;
 }
 
-.help-block {
-    margin: 0;
-}
 #preview {
     display: none;
 }

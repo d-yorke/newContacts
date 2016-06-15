@@ -3,7 +3,7 @@ angular.module("Contacts", [
     "UserList",
     "Main"
 ])
-    .config(function ($routeProvider) {
+    .config(function($routeProvider) {
         $routeProvider
             .when("/", {
                 templateUrl: "/public/views/list.html",

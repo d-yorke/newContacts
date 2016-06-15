@@ -12,16 +12,15 @@ app.directive("fileModel", ["$parse", function($parse) {
                 if (file) {
                     scope.$apply(function() {
                         modelSetter(scope, file);
-                        scope.fileButton = "danger";
                         if (file.size > 1000000) {
-                            scope.fileValidationMessage = "Файл слишком большой";
+                            scope.fileValidationMessage = "Аватар слишком большой";
                         } else if (file.type !== "image/jpeg" &&
                             file.type !== "image/gif" &&
                             file.type !== "image/png") {
                             scope.fileValidationMessage = "Неправильный тип файла";
                         } else {
-                            scope.fileButton = "success";
-                            scope.fileValidationMessage = "Файл принят";
+                            scope.fileValidationMessage = "";
+                            scope.user.avatarWillDelete = false;
                         }
                         scope.getPreview(document.querySelector("#form-avatar"), scope.user.avatarWillDelete);
                     });
@@ -76,41 +75,14 @@ app.controller("MainCtrl", [
                 : "../public/default_images/person.png";
         };
 
-        editUser.on("hidden.bs.modal", function() { $route.reload(); });
+        editUser.on("hidden.bs.modal", function() {
+            $route.reload();
+        });
 
         $scope.user = {};
         $scope.user.operation = "create/update";
-        $scope.fileButton = "default";
-        $scope.fileValidationMessage = "Выберите файл";
+        $scope.fileValidationMessage = "";
 
-        function avatarPost(user) {
-            if ($scope.file || $scope.user.avatarWillDelete) {
-                var fd = new FormData;
-                fd.append("operation", $scope.user.avatarWillDelete ? "deletePhoto" : "uploadPhoto");
-                if ($scope.file && !$scope.user.avatarWillDelete) fd.append("file", $scope.file);
-                fd.append("user", user);
-                $http.post("/photo", fd,
-                    {
-                        transformRequest: angular.identity,
-                        headers: {"Content-Type": undefined}
-                    })
-                    .error(function(data) {
-                        console.log(data);
-                        $scope.showError(data);
-                    })
-            }
-        }
-        $scope.createUser = function() {
-            $http.post("/new", $scope.user)
-                .success(function(newUser) {
-                    $location.path("/");
-                    avatarPost(newUser._id);
-                })
-                .error(function(data) {
-                    console.log(data);
-                    $scope.showError(data);
-                });
-        };
         if ($location.search().id) {
             $http.get("/id" + $location.search().id)
                 .success(function(data) {
@@ -128,11 +100,39 @@ app.controller("MainCtrl", [
                     }
                 });
         }
+        $scope.avatarPost = function(user) {
+            if ($scope.file || ($scope.user.avatar && $scope.user.avatarWillDelete)) {
+                var fd = new FormData;
+                fd.append("operation", $scope.user.avatarWillDelete ? "deletePhoto" : "uploadPhoto");
+                if ($scope.file && !$scope.user.avatarWillDelete) fd.append("file", $scope.file);
+                fd.append("user", user);
+                $http.post("/photo", fd,
+                    {
+                        transformRequest: angular.identity,
+                        headers: {"Content-Type": undefined}
+                    })
+                    .error(function(data) {
+                        console.log(data);
+                        $scope.showError(data);
+                    })
+            }
+        };
+        $scope.createUser = function() {
+            $http.post("/new", $scope.user)
+                .success(function(newUser) {
+                    $location.path("/");
+                    $scope.avatarPost(newUser._id);
+                })
+                .error(function(data) {
+                    console.log(data);
+                    $scope.showError(data);
+                });
+        };
         $scope.updateUser = function() {
             $scope.user.operation = "create/update";
             $http.post("/id" + $location.search().id, $scope.user)
                 .success(function() {
-                    avatarPost($location.search().id);
+                    $scope.avatarPost($location.search().id);
                     editUser.modal("hide");
                 })
                 .error(function(data) {
@@ -156,7 +156,7 @@ app.controller("MainCtrl", [
                 })
         };
         $scope.getPreview = function(input, deleteAvatar) {
-            if (input.files && input.files[0] && $scope.fileButton === "success" && !deleteAvatar) {
+            if (input.files && input.files[0] && !deleteAvatar && !$scope.fileValidationMessage) {
                 var reader = new FileReader();
                 reader.onload = function(e) {
                     preview.attr("src", e.target.result).slideDown();
@@ -182,5 +182,10 @@ app.controller("MainCtrl", [
             $scope.user.avatarWillDelete = !$scope.user.avatarWillDelete;
             $scope.user.avatarWillDelete ? preview.slideUp() : preview.slideDown();
         };
+        $scope.cancelUploadAvatar = function() {
+            $scope.file = "";
+            document.querySelector("#form-avatar").value = "";
+            $scope.user.avatar ? preview.attr("src", $scope.user.avatar) : preview.slideUp();
+        }
     }
 ]);

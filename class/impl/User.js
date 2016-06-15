@@ -149,4 +149,3 @@ function User(userObject) {
 }
 
 module.exports = User;
-logger.trace(__filename + " - connected");
