@@ -4,10 +4,11 @@ var favicon = require("serve-favicon");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var multerUpload = require("./class/utils/multer");
-var log4js = require("log4js");
-var logger = log4js.getLogger();
 var tools = require("./class/utils/tools");
 var app = express();
+var log4js = require("log4js");
+var logger = log4js.getLogger();
+
 
 app.use(favicon(path.join(__dirname, "public", "favicon.ico")));
 app.use(bodyParser.json());
@@ -15,13 +16,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use("/public", express.static(path.join(__dirname, "/public")));
 app.use("/bower_components", express.static(path.join(__dirname, "/bower_components")));
-app.use("*",function(req, res, next) {
-    var ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress ||
-        req.socket.remoteAddress || req.connection.socket.remoteAddress;
-    var reg = /.*:/;
-    logger.trace(req.method + " on " + req.baseUrl + " from " + ip.replace(reg, ""));
-    next();
-}); // logging method, url and ip
+//app.use("*",function(req, res, next) {
+//    var ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress ||
+//        req.socket.remoteAddress || req.connection.socket.remoteAddress;
+//    var reg = /.*:/;
+//    logger.trace(req.method + " on " + req.baseUrl + " from " + ip.replace(reg, ""));
+//    next();
+//}); // logging method, url and ip
 
 app.get("/", express.static("public"));
 app.route("/list")

@@ -10,6 +10,10 @@ h3 {
     font-family: "Merriweather", sans-serif;
 }
 
+#container {
+    margin-bottom: 100px;
+}
+
 hr,
 .page-header,
 .modal-footer,
@@ -211,7 +215,8 @@ hr,
 
 /**************/
 
-#avatar {
+#avatar,
+#preview {
     max-height: 300px;
     max-width: 200px;
 }

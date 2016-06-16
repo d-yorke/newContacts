@@ -5,9 +5,7 @@ var fs = require("fs");
 var mime = require("mime");
 var multer = require("multer");
 var tools = require("./tools");
-var errorHandler = require("./errorHandler");
-var log4js = require("log4js");
-var logger = log4js.getLogger();
+var writeLog = require("./logWriter");
 
 var storage = multer.diskStorage({
     destination: function(req, file, callback) {
@@ -29,7 +27,7 @@ var upload = multer({
             callback(null, true);
             return
         }
-        logger.error(new Error("Incorrect file type"));
+        writeLog("", new Error("Incorrect file type"));
         callback(true);
     }
 }).single("file");

@@ -4,7 +4,9 @@ var User = require("./User");
 function UserList() {
     this.getUser = function (searchObj, callback) {
         UserModel.findOne(searchObj, function (err, findUser) {
-            if (err) return callback(null, err);
+            if (err) {
+                return callback(null, err);
+            }
             callback(new User(findUser).toObject());
         });
     };
@@ -17,7 +19,9 @@ function UserList() {
                     {"lastName": {$regex: new RegExp(searchQuery, "i")}}
                 ]
             }, function (err, data) {
-                if (err) return callback(null, err);
+                if (err) {
+                    return callback(null, err);
+                }
                 var list = [];
                 for (var i = 0; i < data.length; i++) list.push(new User(data[i]).toObject());
             callback(list);

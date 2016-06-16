@@ -3,7 +3,7 @@ var User = require("./../impl/User");
 var UserList = require("./../impl/UserList");
 var userList = new UserList;
 var validate = require("./validate");
-var errorHandler = require("./errorHandler");
+var writeLog = require("./logWriter");
 
 function doAction(req, res, operation, searchQuery) {
     var user = new User;
@@ -12,7 +12,7 @@ function doAction(req, res, operation, searchQuery) {
     if (operation === "getList") {
         userList.getList(searchQuery, function(list, err) {
             if (err) {
-                return errorHandler(res, err, 500);
+                return writeLog("", err, res, 500);
             }
             res.send(list).end();
         });
@@ -21,7 +21,7 @@ function doAction(req, res, operation, searchQuery) {
     if (operation === "getUser") {
         userList.getUser({"_id": req.params[0]}, function(user, err) {
             if (err) {
-                return errorHandler(res, err, 500);
+                return writeLog("", err, res, 500);
             }
             res.send(user).end();
         });
@@ -32,34 +32,34 @@ function doAction(req, res, operation, searchQuery) {
             if (req.params[0]) {
                 user.update(req.params[0], req.body, function(err) {
                     if (err) {
-                        return errorHandler(res, err, 500);
+                        return writeLog("", err, res, 500);
                     }
                     res.status(202).send("User updated");
                 });
             } else {
                 new User(req.body).saveToDB(function(data, err) {
                     if (err) {
-                        return errorHandler(res, err, 500);
+                        return writeLog("", err, res, 500);
                     }
                     res.send(data).end();
                 });
             }
         } else {
-            return errorHandler(res, new Error(validation), 500);
+            return writeLog("", new Error(validation), res, 500);
         }
         return
     }
     if (operation === "delete") {
         userList.getUser({"_id": req.params[0]}, function(foundUser, err) {
             if (err) {
-                return errorHandler(res, err, 500);
+                return writeLog("", err, res, 500);
             } else {
                 if (fs.existsSync(foundUser.avatar)) {
                     fs.unlinkSync(foundUser.avatar);
                 }
                 user.deleteFromDB(req.params[0], function(err) {
                     if (err) {
-                        return errorHandler(res, err, 500);
+                        return writeLog("", err, res, 500);
                     }
                     res.status(202).send("User deleted");
                 });
@@ -70,11 +70,11 @@ function doAction(req, res, operation, searchQuery) {
     if (operation === "deletePhoto") {
         userList.getUser({"_id": req.body.user}, function(foundUser, err) {
             if (err) {
-                return errorHandler(res, err, 500);
+                return writeLog("", err, res, 500);
             } else {
                 user.update(req.body.user, {avatar: ""}, function(err) {
                     if (err) {
-                        return errorHandler(res, err, 500);
+                        return writeLog("", err, res, 500);
                     } else {
                         if (fs.existsSync(foundUser.avatar)) {
                             fs.unlinkSync(foundUser.avatar);
@@ -87,7 +87,7 @@ function doAction(req, res, operation, searchQuery) {
         return
     }
 
-    return errorHandler(res, new Error("Tools error"), 500);
+    return writeLog("", new Error("Tools error"), res, 500);
 }
 
 module.exports = doAction;

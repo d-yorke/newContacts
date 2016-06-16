@@ -6,8 +6,8 @@
 
 var app = require("../app");
 var http = require("http");
-var log4js = require('log4js');
-var logger = log4js.getLogger();
+var fs = require("fs");
+var writeLog = require("./../class/utils/logWriter");
 
 /**
  * Get port from environment and store in Express.
@@ -88,5 +88,10 @@ function onListening() {
     var bind = typeof addr === "string"
         ? "pipe " + addr
         : "port " + addr.port;
-    logger.trace("Listening on " + bind);
+    writeLog("Listening on " + bind);
+    fs.writeFile("./error.log", "", function(err) {
+        if (err) {
+            logger.error(err);
+        }
+    });
 }

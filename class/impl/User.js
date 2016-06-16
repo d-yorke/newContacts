@@ -1,6 +1,5 @@
 var UserModel = require("./../utils/mongoose");
-var log4js = require('log4js');
-var logger = log4js.getLogger();
+var writeLog = require("./../utils/logWriter");
 
 function User(userObject) {
     if (userObject) {
@@ -116,7 +115,7 @@ function User(userObject) {
             if (err) {
                 return callback(savedUser, err);
             }
-            logger.info(savedUser._id + " saved to DB");
+            writeLog(savedUser._id + " saved to DB");
             callback(savedUser);
         });
     }; // callback(savedUser, err)
@@ -126,9 +125,9 @@ function User(userObject) {
                 return callback(err);
             }
             if (updated.n) {
-                logger.info(stringId + " updated");
+                writeLog(stringId + " updated");
             } else {
-                logger.warn("Wrong update data or user not found");
+                return callback(new Error("Wrong update data or user not found"));
             }
             callback();
         });
@@ -139,9 +138,9 @@ function User(userObject) {
                 return callback(err);
             }
             if (deleted.result.n) {
-                logger.info(stringId + " deleted from DB");
+                writeLog(stringId + " deleted from DB");
             } else {
-                logger.warn("User not found");
+                return callback(new Error("User not found"));
             }
             callback();
         })

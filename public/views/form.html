@@ -87,7 +87,7 @@
     <div class="form-group">
         <label class="col-sm-3 control-label">Аватар</label>
         <div class="col-sm-9">
-            <div class="col-sm-12">
+            <div ng-class="!(user.avatar && !file) ? 'col-sm-12' : 'btn-group col-sm-12'">
                 <label ng-hide="file"
                        id="upload-button"
                        class="btn btn-default col-sm-6">

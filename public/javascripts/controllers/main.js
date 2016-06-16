@@ -185,7 +185,8 @@ app.controller("MainCtrl", [
         $scope.cancelUploadAvatar = function() {
             $scope.file = "";
             document.querySelector("#form-avatar").value = "";
-            $scope.user.avatar ? preview.attr("src", $scope.user.avatar) : preview.slideUp();
+            $scope.user.avatar ? preview.attr("src", $scope.user.avatar).slideDown() : preview.slideUp();
+            $scope.fileValidationMessage = "";
         }
     }
 ]);
