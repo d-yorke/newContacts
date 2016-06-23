@@ -23,7 +23,9 @@ function UserList() {
                     return callback(null, err);
                 }
                 var list = [];
-                for (var i = 0; i < data.length; i++) list.push(new User(data[i]).toObject());
+                for (var i = 0; i < data.length; i++) {
+                    list.push(new User(data[i]).toObject());
+                }
             callback(list);
         });
     };

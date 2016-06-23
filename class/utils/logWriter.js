@@ -13,11 +13,6 @@ function writeLog (message, err, res, status) {
     }
     logger.info(message);
 
-    function writeLogToFile(logMessage) {
-        //fs.appendFile()
-    }
-
-
 }
 
 module.exports = writeLog;
