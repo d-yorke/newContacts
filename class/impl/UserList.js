@@ -11,23 +11,33 @@ function UserList() {
         });
     };
     this.getList = function (searchQuery, callback) {
-        UserModel.find(+searchQuery
-            ? { phone: new RegExp(+searchQuery + "", "i") }
+
+        UserModel.find(+searchQuery.search
+            ? { phone: new RegExp(+searchQuery.search + "", "i") }
             : {
                 $or: [
-                    {"firstName": {$regex: new RegExp(searchQuery, "i")}},
-                    {"lastName": {$regex: new RegExp(searchQuery, "i")}}
+                    {"firstName": {$regex: new RegExp(searchQuery.search, "i")}},
+                    {"lastName": {$regex: new RegExp(searchQuery.search, "i")}}
                 ]
-            }, function (err, data) {
+            })
+            .sort({lastName: 1})
+            .skip(+searchQuery.page * 15)
+            .limit(15)
+            .exec(function (err, data) {
                 if (err) {
                     return callback(null, err);
                 }
                 var list = [];
                 for (var i = 0; i < data.length; i++) {
-                    list.push(new User(data[i]).toObject());
+                    var newUser = new User(data[i]);
+                    list.push({
+                        _id: newUser.getId(),
+                        firstName: newUser.getFirstName(),
+                        lastName: newUser.getLastName()
+                    });
                 }
-            callback(list);
-        });
+                callback(list);
+            });
     };
 }
 

@@ -9,14 +9,14 @@ function validate(formData) {
         /^(male|female)$/,
         /(19|20)\d\d-((0[1-9]|1[012])-(0[1-9]|[12]\d)|(0[13-9]|1[012])-30|(0[13578]|1[02])-31)/,
         /^\+\d{11}$/,
-        /^[a-zA-Z][a-zA-Z0-9\.\,\-\_]{5,31}$/,
-        /^([a-zA-Z0-9\_]{5,33}|id\d{1,31})$/];
+        /^[a-zA-Z][a-zA-Z0-9\.,\-_]{5,31}$/,
+        /^([a-zA-Z0-9_]{5,33}|id\d{1,31})$/];
     var fields = ["firstName", "lastName", "email", "gender", "birthDate", "phone", "skype", "vk"];
     var result = [];
 
     for (var prop in formData) {
         for (var i = 0; i < fields.length; i++) {
-            if (prop === fields[i]) {
+            if (prop === fields[i] && formData.hasOwnProperty(prop)) {
                 if (formData[prop] && formData[prop].search(regs[i])) {
                     result.push(fields[i]);
                 }

@@ -11,8 +11,8 @@
        placeholder="Поиск"
 />
 <br>
-<div class="list-group">
-    <a ng-href="#/user?id={{users._id}}" class="list-group-item" ng-repeat="users in users | orderBy: 'lastName'">
+<div class="list-group" id="list">
+    <a ng-href="#/user?id={{users._id}}" class="list-group-item" ng-repeat="users in users">
         {{users.firstName + " " + users.lastName}}
     </a>
 </div>

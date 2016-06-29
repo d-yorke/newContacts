@@ -13,6 +13,10 @@ h3 {
 #container {
     margin-bottom: 100px;
 }
+.list-group {
+    overflow-y: scroll;
+    height: 500px;
+}
 
 hr,
 .page-header,

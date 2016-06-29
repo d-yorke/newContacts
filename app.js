@@ -30,13 +30,9 @@ app.use("*", function(req, res, next) {
     next();
 }); // logging method, url and ip
 app.get("/", express.static("public"));
-app.route("/list")
-    .get(function(req, res) {
-        tools(req, res, "getList", "");
-    })
-    .post(function(req, res) {
-        tools(req, res, "getList", req.body.search);
-    });
+app.get("/list", function(req, res) {
+    tools(req, res, "getList", req.query);
+});
 app.route("/id*")
     .get(function(req, res) {
         tools(req, res, "getUser", "");

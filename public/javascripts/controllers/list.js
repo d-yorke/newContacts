@@ -6,26 +6,35 @@ app.controller("UserListCtrl", [
     function($http, $scope) {
 
         var search = $("#search");
+        var list = $("#list");
+        var pageNumber = 1;
         $scope.users = [];
 
-        $http.get("/list")
-            .success(function(data) {
-                $scope.users = data;
-            })
-            .error(function(data) {
-                console.log(data);
-                $scope.showError(data);
-            });
-
-        search.on("input", function() {
-            $http.post("/list", {search: search.val()})
+        $scope.getList = function(page, search) {
+            $http.get("/list?page=" + (page ? page : "") + "&search=" + (search ? search : ""))
                 .success(function(data) {
-                    $scope.users = data;
+                    if (page === 0) {
+                        $scope.users = data;
+                    } else {
+                        Array.prototype.push.apply($scope.users, data);
+                    }
                 })
                 .error(function(data) {
                     console.log(data);
                     $scope.showError(data);
                 });
+        }; $scope.getList(0, "");
+
+        search.on("input", function() {
+            $scope.getList(0, search.val());
+            pageNumber = 1;
+        });
+
+        list.scroll(function() {
+            if (list.scrollTop() + list.innerHeight() >= list[0].scrollHeight) {
+                $scope.getList(pageNumber, search.val());
+                pageNumber++;
+            }
         });
     }
 ]);

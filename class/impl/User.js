@@ -148,3 +148,15 @@ function User(userObject) {
 }
 
 module.exports = User;
+//
+//for (var i = 0; i < 30; i++) {
+//    var user = new User({
+//        firstName: "Clone " + i,
+//        lastName: "Cloneson " + i,
+//        email: "clone" + i + "@gmail.com"
+//    });
+//    user.saveToDB(function(u,e) {
+//        if (e) console.log(e);
+//        console.log(u.firstName + "saved")
+//    })
+//}
