@@ -23,10 +23,10 @@ app.use("*", function(req, res, next) {
     if (req.method === "POST") {
         writeLog(req.method + " on " + req.baseUrl + " from " + ip.replace(reg, ""));
     }
-    if (ip.replace(reg, "") === "192.168.0.169") {
-        res.end("ИДИ НАХУЙ!");
-        return
-    } // Защита от бородача
+    //if (ip.replace(reg, "") === "192.168.0.169") {
+    //    res.end("ИДИ НАХУЙ!");
+    //    return
+    //} // Защита от бородача
     next();
 }); // logging method, url and ip
 app.get("/", express.static("public"));

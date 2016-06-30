@@ -10,8 +10,8 @@
        ng-model="search"
        placeholder="Поиск"
 />
-<br>
 <div class="list-group" id="list">
+    <div id="scrollbar"></div>
     <a ng-href="#/user?id={{users._id}}" class="list-group-item" ng-repeat="users in users">
         {{users.firstName + " " + users.lastName}}
     </a>
