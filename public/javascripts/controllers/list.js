@@ -52,7 +52,7 @@ app.controller("UserListCtrl", [
             clearTimeout(delay);
             delay = setTimeout(function() {
                 scroll.animate({opacity: 0}, 200);
-            }, 1500);
+            }, 1000);
             scroll.height(list.innerHeight() * (list.innerHeight() / list[0].scrollHeight) + "px");
             scroll.css("top", list.scrollTop() + list.scrollTop() / list[0].scrollHeight * list.innerHeight() + "px");
         });

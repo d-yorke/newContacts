@@ -149,7 +149,7 @@ function User(userObject) {
 
 module.exports = User;
 //
-//for (var i = 0; i < 30; i++) {
+//for (var i = 0; i < 90; i++) {
 //    var user = new User({
 //        firstName: "Clone " + i,
 //        lastName: "Cloneson " + i,

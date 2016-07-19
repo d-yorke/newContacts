@@ -42,7 +42,8 @@ app.controller("MainCtrl", [
     "$scope",
     "$location",
     "$route",
-    function($http, $scope, $location, $route) {
+    "$window",
+    function($http, $scope, $location, $route, $window) {
         var tel = $("#phone");
         var preview = $("#preview");
         var avatar = $("#avatar");
@@ -86,9 +87,26 @@ app.controller("MainCtrl", [
         if ($location.search().id) {
             $http.get("/id" + $location.search().id)
                 .success(function(data) {
+                    console.log(data);
+                    if (jQuery.isEmptyObject(data)) {
+                        $("#error-modal")
+                            .modal(true)
+                            .on("hidden.bs.modal", function() {
+                                $window.location.href = "/#/";
+                            });
+                        return;
+                    }
                     $scope.user = data;
                     $scope.user.avatarWillDelete = false;
                     preview.css("display", $scope.user.avatar ? "block" : "none");
+                    if($scope.user.phone) {
+                        $scope.user.phone =
+                            $scope.user.phone.slice(0, 2) + " (" +
+                            $scope.user.phone.slice(2, 5) + ") " +
+                            $scope.user.phone.slice(5, 8) + "-" +
+                            $scope.user.phone.slice(8, 10) + "-" +
+                            $scope.user.phone.slice(10, 12);
+                    }
                     if ($scope.user.birthDate) {
                         $scope.user.birthDatePretty = new Date(data.birthDate).toLocaleDateString("ru");
                         $scope.user.birthDate = $scope.user.birthDate.replace(/T.*/, "");
